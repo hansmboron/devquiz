@@ -1,5 +1,5 @@
 import 'package:devquiz/core/core.dart';
-import 'package:devquiz/widgets/score_card_widget.dart';
+import 'package:devquiz/widgets/home/score_card_widget.dart';
 import 'package:flutter/material.dart';
 
 class AppBarWidget extends PreferredSize {
@@ -13,8 +13,8 @@ class AppBarWidget extends PreferredSize {
               children: [
                 Container(
                   padding:
-                      const EdgeInsets.only(left: 20, right: 20, bottom: 61),
-                  height: height * 0.65,
+                      const EdgeInsets.only(left: 20, right: 20, bottom: 40),
+                  height: height * 0.7,
                   width: double.maxFinite,
                   decoration: BoxDecoration(
                     gradient: AppGradients.linear,
@@ -28,7 +28,9 @@ class AppBarWidget extends PreferredSize {
                           style: AppTextStyles.title,
                           children: [
                             TextSpan(
-                                text: 'Hans', style: AppTextStyles.titleBold)
+                              text: 'Hans',
+                              style: AppTextStyles.titleBold,
+                            )
                           ],
                         ),
                       ),

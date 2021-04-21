@@ -1,3 +1,4 @@
+import 'package:devquiz/views/challenge_page.dart';
 import 'package:devquiz/views/home_page.dart';
 import 'package:flutter/material.dart';
 
