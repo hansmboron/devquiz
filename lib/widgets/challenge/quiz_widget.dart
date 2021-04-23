@@ -1,37 +1,51 @@
-import 'package:devquiz/core/app_text_styles.dart';
-import 'package:devquiz/widgets/challenge/answer_widget.dart';
 import 'package:flutter/material.dart';
 
-class QuizWidget extends StatelessWidget {
-  final String title;
+import 'package:devquiz/core/app_text_styles.dart';
+import 'package:devquiz/models/awnser_model.dart';
+import 'package:devquiz/models/question_model.dart';
 
-  const QuizWidget({Key? key, required this.title}) : super(key: key);
+import 'answer_widget.dart';
+
+class QuizWidget extends StatefulWidget {
+  final QuestionModel question;
+  final VoidCallback onChange;
+
+  const QuizWidget({
+    Key? key,
+    required this.question,
+    required this.onChange,
+  }) : super(key: key);
+
+  @override
+  _QuizWidgetState createState() => _QuizWidgetState();
+}
+
+class _QuizWidgetState extends State<QuizWidget> {
+  int indexSelected = -1;
+
+  AwnserModel awnser(int index) => widget.question.awnsers[index];
+
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Column(
         children: [
-          Text(title, style: AppTextStyles.heading),
           SizedBox(height: 24),
-          AnswerWidget(
-            text:
-                'uisdfh soidfh hso hfhf sofh sfho ioefo osf oisf is fius  gf guae gueg ererg  og grj gaerg ag ihg a er gh',
-          ),
-          AnswerWidget(
-            text:
-                'uisdfh soidfh hso hfhf sofh sfho ioefo osf oisf is fius  gf guae gueg ererg  og grj gaerg ag ihg a er gh',
-          ),
-          AnswerWidget(
-            isRight: true,
-            isSelected: true,
-            text:
-                'uisdfh soidfh hso hfhf sofh sfho ioefo osf oisf is fius  gf guae gueg ererg  og grj gaerg ag ihg a er gh',
-          ),
-          AnswerWidget(
-            text:
-                'uisdfh soidfh hso hfhf sofh sfho ioefo osf oisf is fius  gf guae gueg ererg  og grj gaerg ag ihg a er gh',
-          ),
+          Text(widget.question.title, style: AppTextStyles.heading),
+          SizedBox(height: 24),
+          for (var i = 0; i < widget.question.awnsers.length; i++)
+            AwnserWidget(
+              awnser: awnser(i),
+              isSelected: indexSelected == i,
+              disabled: indexSelected != -1,
+              onTap: () {
+                indexSelected = i;
+                setState(() {});
+                Future.delayed(Duration(milliseconds: 500))
+                    .then((value) => widget.onChange());
+              },
+            ),
         ],
       ),
     );

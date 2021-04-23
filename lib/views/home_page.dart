@@ -1,6 +1,7 @@
 import 'package:devquiz/controllers/home_controller.dart';
 import 'package:devquiz/controllers/home_state.dart';
 import 'package:devquiz/core/app_colors.dart';
+import 'package:devquiz/views/challenge_page.dart';
 import 'package:devquiz/widgets/home/app_bar_widget.dart';
 import 'package:devquiz/widgets/home/level_button_widget.dart';
 import 'package:devquiz/widgets/home/quiz_card_widget.dart';
@@ -67,6 +68,16 @@ class _HomePageState extends State<HomePage> {
                 children: controller.quizzes!
                     .map(
                       (e) => QuizCardWidget(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => ChallengePage(
+                                questions: e.questions,
+                              ),
+                            ),
+                          );
+                        },
                         title: e.title,
                         completed:
                             "${e.questionAnswered}/ ${e.questions.length}",
